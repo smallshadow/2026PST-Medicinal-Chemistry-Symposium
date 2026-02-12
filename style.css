@@ -1,0 +1,523 @@
+:root {
+    --primary: #2c3e50;
+    --accent: #3498db;
+    --white: #ffffff;
+    --gray: #f4f4f4;
+}
+
+body {
+    font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    margin: 0;
+    background-color: var(--gray);
+    color: #333;
+}
+
+/* 導覽列設計 */
+.navbar {
+    background: var(--white);
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 20px;
+    align-items: center;
+}
+
+/* 修改 Logo 容器，使其能橫向排列圖片與文字 */
+.logo {
+    display: flex;
+    align-items: center; /* 確保圖片與文字垂直置中 */
+    gap: 10px;           /* 圖片與文字之間的間距 */
+    text-decoration: none;
+}
+
+/* 控制 Logo 圖片的大小 */
+.logo img {
+    height: 40px;        /* 根據導覽列高度（您設定為 70px）建議設定為 40-50px */
+    width: auto;         /* 維持比例 */
+    display: block;
+}
+
+/* 如果有文字，微調文字大小 */
+.logo span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* --- 手機版適應 --- */
+@media screen and (max-width: 768px) {
+    .logo img {
+        height: 30px;    /* 手機版稍微縮小 Logo */
+    }
+    .logo span {
+        font-size: 1rem; /* 手機版縮小文字 */
+    }
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent);
+}
+
+/* 漢堡按鈕隱藏（預設） */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+/* 分頁切換控制 */
+.page-content {
+    display: none; /* 預設全部隱藏 */
+    padding: 40px 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.page-content.active {
+    display: block; /* 只有帶有 active 的會顯示 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 自適應部分：手機版面 */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* 顯示漢堡按鈕 */
+    }
+
+    .nav-menu {
+        display: none; /* 隱藏原本的選單 */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: var(--white);
+        border-top: 1px solid #eee;
+    }
+
+    .nav-menu.active {
+        display: flex; /* 點擊後顯示 */
+    }
+
+    .nav-link {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* 其他內容樣式 */
+/* 主視覺容器：藍色漸層底層 */
+.hero {
+    position: relative;
+    height: 80vh; 
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+
+    /* 多重背景設定 */
+    /* 順序：第一張在最上面 (建築物)，第二張在下面 (藍底圖) */
+    background-image: 
+        url('bg02.png'), 
+        url('bg01.png'); 
+
+    /* 位置設定：建築物貼齊底部，藍底圖居中 */
+    background-position: 
+        bottom center, 
+        center center;
+
+    /* 重複設定：都不重複 */
+    background-repeat: 
+        no-repeat, 
+        no-repeat;
+
+    /* 大小設定：關鍵在於兩張都設為 cover 或建築物設為 contain */
+    background-size: 
+        contain, 
+        cover;
+
+    /* 【核心：視差效果】 */
+    /* 建築物 fixed (固定在底部)，藍色底圖 scroll (正常捲動) */
+    background-attachment: 
+        fixed, 
+        scroll; 
+}
+
+
+
+/* 文字內容層 - 增加左距與整體大小 */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    padding-left: 12%; /* 讓文字整體靠中一點 */
+    text-align: left;
+    max-width: 1000px;
+}
+
+/* --- 需求 1: 右上角 LOGO --- */
+.hero-logo {
+    position: absolute;
+    top: 30px;
+    right: 5%;
+    z-index: 5;
+}
+
+.hero-logo img {
+    width: 150px; /* 您可以根據需求調整 LOGO 大小 */
+    height: auto;
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+}
+
+/* 文字顏色與大小設定 */
+.main-title {
+    font-size: 5.5rem; /* 大標題更強烈 */
+    line-height: 1.05;
+    margin: 0;
+}
+
+/* 2026 */
+.main-title .year {
+    color: #ffffff; 
+    font-weight: 900;
+}
+
+/* 台灣藥學會 - 金黃色 */
+.main-title .org {
+    color: #f6b026; 
+    font-size: 3rem;
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+/* 藥物化學研討會 - 橘色 */
+.main-title .subject {
+    color: #f6b026; 
+}
+
+/* 英文標題 - 嫩綠色 */
+.eng-title {
+    color: #93c01f; 
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+/* 白色分隔線 */
+.divider {
+    width: 450px;
+    height: 3px;
+    background-color: white;
+    margin: 18px 0;
+}
+
+/* 日期 - 白色加粗 */
+.date {
+    font-size: 4rem;
+    color: white;
+    font-weight: 800;
+    margin: 5px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 最新消息日期 - 白色加粗 */
+.date2 {
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+    margin: 5px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 地點資訊 */
+.location {
+    color: rgb(255, 255, 255);
+    font-size: 1.4rem;
+    line-height: 1.4;
+    font-weight: 600;
+    
+    /* 增加文字陰影：水平 偏移, 垂直偏移, 模糊半徑, 顏色 */
+    /* 這裡使用半透明的黑色 (rgba) 來達到自然的效果 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+/* 如果您想讓定位圖示也有陰影效果 */
+.location i {
+    color: #f17216; 
+    margin-right: 8px;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.location span {
+    font-size: 1.1rem;
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+}
+
+/* 贊助單位容器 */
+.sponsors-container {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+    padding: 0 20px;
+}
+
+.sponsors-container h3 {
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Logo 網格佈局 */
+.sponsors-grid {
+    display: flex;
+    flex-wrap: wrap;       /* 手機版自動換行 */
+    justify-content: center;
+    align-items: center;
+    gap: 30px;             /* Logo 之間的間距 */
+}
+
+.sponsor-item img {
+    height: 50px;          /* 統一 Logo 高度 */
+    width: auto;
+    filter: grayscale(100%); /* 預設灰階，看起來更整潔 */
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+/* 滑鼠移上去的效果 */
+.sponsor-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05); /* 輕微放大 */
+}
+
+/* 頁尾分隔線 */
+.footer-divider {
+    border: 0;
+    border-top: 1px solid #444;
+    width: 60%;
+    margin: 20px auto;
+}
+
+/* 手機版調整 */
+@media screen and (max-width: 768px) {
+    .sponsor-item img {
+        height: 40px;      /* 手機版稍微縮小 Logo */
+    }
+    .sponsors-grid {
+        gap: 20px;
+    }
+}
+
+/* 手機版適應：修正文字貼邊與縮小字體 */
+@media screen and (max-width: 768px) {
+    .hero {
+        /* 調整第一個參數的垂直百分比 (原本是 bottom center)
+           第一個數值 center 代表水平置中
+           第二個數值 80% 代表離頂部 80% 的距離（即離底高度上升）
+        */
+        background-position: 
+            center 100%,  /* 調整這張圖（bg02.png/建築物）的垂直位置，數字越小越高 */
+            center center; /* 第二張圖（藍色底圖）維持置中 */
+
+        /* 確保背景不要因為 fixed 屬性在手機上失效而跑版 */
+        background-attachment: scroll, scroll; 
+    }
+    /* 1. 導覽列調整 */
+    .hero-logo {
+        top: 15px;
+        right: 15px;
+    }
+    .hero-logo img {
+        width: 80px;
+    }
+
+    /* 2. 主視覺內容置中 */
+    .hero-content {
+        padding-left: 0; /* 移除電腦版的左邊距 */
+        margin: 0 auto;  /* 容器水平置中 */
+        text-align: center; /* 文字置中 */
+        width: 90%; /* 確保左右留有一點呼吸空間 */
+    }
+
+    /* 3. 縮小文字字級 */
+    .main-title { 
+        font-size: 2.8rem; /* 從 5.5rem 縮小 */
+    }
+    
+    .main-title .org { 
+        font-size: 2.6rem; 
+        margin-left: 0; /* 手機版不需要與年份錯開太遠 */
+        display: block; /* 讓組織名稱在手機上換行顯示，避免擠壓 */
+        margin-left: 15px;
+        /* 2. 確保它是 inline-block，有時候預設的換行會帶出額外間距 */
+        display: inline-block; 
+        /* 3. 如果想再更近，可以微調下方的負 margin (慎用) */
+        margin-bottom: -5px;
+    }
+
+    .main-title .subject {
+        font-size: 3rem;
+    }
+
+    .eng-title {
+        font-size: 1.1rem; /* 英文標題適度縮小 */
+        line-height: 1.3;
+    }
+
+    .divider {
+        width: 80%; /* 分隔線寬度改為比例 */
+        margin: 15px auto; /* 線條置中 */
+    }
+
+    .date { 
+        font-size: 2.2rem; /* 日期縮小，確保單行顯示 */
+    }
+
+     .date2 { 
+        font-size: 1.2rem; /* 日期縮小，確保單行顯示 */
+    }
+
+    .location {
+        font-size: 1rem;
+    }
+
+    /* 4. 手機選單優化 (維持之前的調整) */
+    .nav-menu {
+        padding: 20px 0;
+    }
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 20px;
+    }
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    min-height: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #333;
+    color: white;
+    margin-top: 40px;
+}
+/* 首頁雙欄佈局 */
+.home-grid {
+    display: flex;
+    gap: 0; /* 區塊緊貼或設為 20px 產生間距 */
+    flex-wrap: wrap;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.home-column {
+    flex: 1; /* 左右等寬 */
+    padding: 40px;
+    min-width: 300px; /* 防止太窄時擠壓 */
+}
+
+/* 左側：最新消息顏色 (淺灰色調) */
+.news-section {
+    background-color: #ffffff;
+}
+
+/* 右側：活動資訊顏色 (淡藍色調) */
+.info-section {
+    background-color: #eef7fd; /* 輕微的淡藍色 */
+    border-left: 1px solid #d0e3f0;
+}
+
+/* 標題美化 */
+.home-column h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--primary);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* 內容列表美化 */
+.news-list {
+    list-style: none;
+    padding: 0;
+}
+
+.news-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+.info-item strong {
+    display: block;
+    color: var(--accent);
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.info-item p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 手機版適應：當螢幕小於 800px 時，自動變成上下兩欄 */
+@media screen and (max-width: 800px) {
+    .home-grid {
+        flex-direction: column;
+    }
+    
+    .info-section {
+        border-left: none;
+        border-top: 5px solid var(--accent);
+    }
+    
+    .home-column {
+        padding: 30px 20px;
+    }
+}
