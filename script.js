@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
             this.y = Math.random() * canvas.height;
             // --- 3. 速度 (Velocity) ---
         // 數值越大漂浮越快。0.3 代表每幀移動 0.3 像素。
-            this.vx = (Math.random() - 0.5) * 0.5; 
-            this.vy = (Math.random() - 0.5) * 0.5;
+            this.vx = (Math.random() - 0.5) * 1.7; 
+            this.vy = (Math.random() - 0.5) * 1.7;
             // --- 1. 六角形大小 (Size) ---
         // 這是六角形中心到頂點的距離。35 像素大約等於直徑 70 像素。
             this.radius = 45; 
