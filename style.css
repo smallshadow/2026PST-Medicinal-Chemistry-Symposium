@@ -138,6 +138,10 @@ body {
 /* 其他內容樣式 */
 /* 主視覺容器：藍色漸層底層 */
 .hero {
+    /* position: relative;*/
+    overflow: hidden; /* 防止分子飄出邊框 */
+    /* ... 保持原有背景設定 ... */
+    z-index: 1; /* 確保 Hero 是定位基準 */
     position: relative;
     height: 80vh; 
     min-height: 500px;
@@ -174,7 +178,15 @@ body {
         scroll; 
 }
 
-
+#moleculeCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* 放在背景之上，文字 (z-index: 10) 之下 */
+    pointer-events: none; /* 讓滑鼠點擊可以穿透畫布，不影響按鈕點擊 */
+}
 
 /* 文字內容層 - 增加左距與整體大小 */
 .hero-content {
@@ -185,12 +197,17 @@ body {
     max-width: 1000px;
 }
 
+/* 確保建築物與 LOGO 在分子之上 */
+.parallax-buildings {
+    z-index: 3; 
+}
+
 /* --- 需求 1: 右上角 LOGO --- */
 .hero-logo {
     position: absolute;
     top: 30px;
     right: 5%;
-    z-index: 5;
+    z-index: 4;
 }
 
 .hero-logo img {
