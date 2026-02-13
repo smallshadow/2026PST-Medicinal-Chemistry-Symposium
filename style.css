@@ -149,8 +149,8 @@ body {
     /* 多重背景設定 */
     /* 順序：第一張在最上面 (建築物)，第二張在下面 (藍底圖) */
     background-image: 
-        url('bg02.png'), 
-        url('bg01.png'); 
+        url('bg03.png'), 
+        url('bg04.png'); 
 
     /* 位置設定：建築物貼齊底部，藍底圖居中 */
     background-position: 
