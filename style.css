@@ -12,6 +12,10 @@ body {
     color: #333;
 }
 
+p{
+    font-size: 1.2rem;
+}
+
 /* 導覽列設計 */
 .navbar {
     background: var(--white);
@@ -52,7 +56,7 @@ body {
 
 /* 如果有文字，微調文字大小 */
 .logo span {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--primary);
 }
@@ -63,7 +67,7 @@ body {
         height: 30px;    /* 手機版稍微縮小 Logo */
     }
     .logo span {
-        font-size: 1rem; /* 手機版縮小文字 */
+        font-size: 1.2rem; /* 手機版縮小文字 */
     }
 }
 
@@ -73,10 +77,11 @@ body {
 }
 
 .nav-link {
+    font-size: 1.2rem;
     padding: 10px 20px;
     text-decoration: none;
     color: var(--primary);
-    font-weight: 500;
+    font-weight: bold;
     transition: 0.3s;
 }
 
@@ -270,7 +275,7 @@ body {
 
 /* 最新消息日期 - 白色加粗 */
 .date2 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: rgb(0, 0, 0);
     font-weight: 800;
     margin: 5px 0;
@@ -444,7 +449,7 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 85%;
     margin: auto;
     background: white;
     min-height: 400px;
@@ -488,7 +493,7 @@ footer {
 /* 標題美化 */
 .home-column h2 {
     margin-top: 0;
-    font-size: 1.4rem;
+    font-size: 2rem;
     color: var(--primary);
     border-bottom: 2px solid var(--accent);
     padding-bottom: 10px;
@@ -515,7 +520,7 @@ footer {
     display: block;
     color: var(--accent);
     margin-bottom: 5px;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
 }
 
 .info-item p {
