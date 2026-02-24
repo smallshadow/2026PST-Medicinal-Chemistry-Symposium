@@ -12,8 +12,20 @@ body {
     color: #333;
 }
 
-p{
-    font-size: 1.2rem;
+/* 針對標題 */
+h1 {
+    /* 最小值 1.8rem, 隨螢幕寬度變化 5vw, 最大值 3rem */
+    font-size: clamp(1.8rem, 5vw + 1rem, 3rem);
+}
+
+/* 針對內文 */
+p, .info-item p {
+    /* 最小值 1rem, 隨寬度變化 1.2vw, 最大值 1.25rem */
+    font-size: clamp(1.3rem, 1vw + 0.5rem, 2.25rem);
+}
+li {
+    /* 最小值 1rem, 隨寬度變化 1.2vw, 最大值 1.25rem */
+    font-size: clamp(1.3rem, 1vw + 0.5rem, 2.25rem);
 }
 
 /* 導覽列設計 */
@@ -56,7 +68,8 @@ p{
 
 /* 如果有文字，微調文字大小 */
 .logo span {
-    font-size: 2rem;
+     /* 最小值 1.8rem, 隨螢幕寬度變化 5vw, 最大值 3rem */
+    font-size: clamp(1rem, 1.2vw + 0.5rem, 4rem);
     font-weight: bold;
     color: var(--primary);
 }
@@ -77,8 +90,8 @@ p{
 }
 
 .nav-link {
-    font-size: 1.2rem;
-    padding: 10px 20px;
+    font-size: clamp(0.3rem, 0.7vw + 0.5rem, 1.2rem);
+    padding: 10px 10px;
     text-decoration: none;
     color: var(--primary);
     font-weight: bold;
@@ -86,7 +99,15 @@ p{
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--accent);
+    background-color: #1e4794 !important; /* 背景反黑 */
+    color: #ffffff !important;           /* 文字反白 */
+    /* --- 圓角核心程式碼 --- */
+    border-radius: 20px;                 /* 數值越大越圓，20px 通常會有膠囊型效果 */
+    
+    /* --- 優化間距 --- */
+    padding: 8px 18px;                   /* 上下 8px，左右 18px，讓色塊變寬一點好看 */
+    display: inline-block;               /* 確保圓角與背景能正確撐開 */
+    transition: all 0.3s ease;           /* 讓切換分頁時顏色變化更平滑 */
 }
 
 /* 漢堡按鈕隱藏（預設） */
@@ -275,7 +296,8 @@ p{
 
 /* 最新消息日期 - 白色加粗 */
 .date2 {
-    font-size: 1.2rem;
+    /* 最小值 1rem, 隨寬度變化 1.2vw, 最大值 1.25rem */
+    font-size: clamp(1.3rem, 1vw + 0.5rem, 2.25rem);
     color: rgb(0, 0, 0);
     font-weight: 800;
     margin: 5px 0;
@@ -316,6 +338,7 @@ p{
 }
 
 .sponsors-container h3 {
+    text-align: center;
     font-size: 1.1rem;
     color: #bbb;
     margin-bottom: 20px;
@@ -520,7 +543,8 @@ footer {
     display: block;
     color: var(--accent);
     margin-bottom: 5px;
-    font-size: 1.2rem;
+    /* 最小值 1rem, 隨寬度變化 1.2vw, 最大值 1.25rem */
+    font-size: clamp(1.3rem, 1vw + 0.5rem, 2.25rem);
 }
 
 .info-item p {
