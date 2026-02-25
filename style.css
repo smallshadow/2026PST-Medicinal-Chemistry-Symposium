@@ -17,6 +17,14 @@ h1 {
     /* 最小值 1.8rem, 隨螢幕寬度變化 5vw, 最大值 3rem */
     font-size: clamp(1.8rem, 5vw + 1rem, 3rem);
 }
+h2{
+    /* 最小值 1.8rem, 隨螢幕寬度變化 5vw, 最大值 3rem */
+    font-size: clamp(1.3rem, 5vw + 1rem, 2rem);
+}
+strong{
+    /* 最小值 1.8rem, 隨螢幕寬度變化 5vw, 最大值 3rem */
+    font-size: clamp(1rem, 5vw + 1rem, 1.6rem);
+}
 
 /* 針對內文 */
 p, .info-item p {
@@ -354,7 +362,9 @@ li {
     align-items: center;
     gap: 30px;             /* Logo 之間的間距 */
 }
-
+.sponsor-item2 img {
+    height: 100px;  
+}
 .sponsor-item img {
     height: 50px;          /* 統一 Logo 高度 */
     width: auto;
@@ -627,4 +637,66 @@ footer {
 
 .hotel-table td {
     font-size: 0.9em;
+}
+
+/* 議程日標題 */
+.day-title {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    margin: 40px 0 0 0;
+    font-size: 1.1rem;
+    text-align: center; /* 標題置中 */
+}
+
+/* 議程表格基礎設定 */
+.agenda-wrapper {
+    overflow-x: auto;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+.agenda-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+/* 強制所有表格內文置中 */
+.agenda-table th, 
+.agenda-table td {
+    padding: 15px;
+    border: 1px solid #eee;
+    text-align: center !important; /* 強制置中 */
+    vertical-align: middle;
+}
+
+.agenda-table th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 休息時間特別顏色 */
+.break-cell {
+    background-color: #fff9f0;
+    color: #d35400;
+    font-style: italic;
+}
+
+/* 晚宴強調 */
+.highlight-row {
+    background-color: #f1f9f1;
+    font-weight: 500;
+}
+
+/* 手機版縮小字體 */
+@media screen and (max-width: 800px) {
+    .agenda-table th, .agenda-table td {
+        padding: 10px 5px;
+        font-size: 0.85rem;
+    }
 }
