@@ -700,3 +700,17 @@ footer {
         font-size: 0.85rem;
     }
 }
+
+/* 調整表格內所有單元格的文字大小 */
+.agenda-wrapper td {
+   /* 最小值 1rem, 隨寬度變化 1.2vw, 最大值 1.25rem */
+    font-size: clamp(1.3rem, 1vw + 0.5rem, 2rem);
+    color: #333;    /* 文字顏色 */
+}
+
+/* 專門針對表格內的 strong 標籤（如 OP 編號或標題） */
+.agenda-wrapper td strong {
+    /* 最小值 1rem, 隨寬度變化 1.2vw, 最大值 1.25rem */
+    font-size: clamp(1.3rem, 1vw + 0.5rem, 2rem);
+    color: #2c3e50;  /* 讓粗體字顏色深一點，更有層次感 */
+}
