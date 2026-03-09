@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // === 1. 共用變數宣告 (確保只宣告一次) ===
+    // === 1. 共用變數宣告 ===
     const menuToggle = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -9,29 +9,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === 2. 手機版選單與分頁切換邏輯 ===
     if (menuToggle && navMenu) {
-        // 點擊漢堡選單
         menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // 防止冒泡
+            e.stopPropagation();
             navMenu.classList.toggle('active');
         });
 
-        // 點擊頁面其他地方關閉選單
         document.addEventListener('click', () => {
             navMenu.classList.remove('active');
         });
     }
 
-    // 分頁切換
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
 
-            // 1. 切換導航標籤狀態
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
 
-            // 2. 切換頁面內容顯示
             pages.forEach(page => {
                 page.classList.remove('active');
                 if (page.id === targetId) {
@@ -39,12 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // 3. 如果是手機版，切換分頁後自動縮回選單
             if (window.innerWidth <= 800) {
                 navMenu.classList.remove('active');
             }
             
-            // 4. 切換分頁後自動捲回頂部
             window.scrollTo(0, 0);
         });
     });
@@ -94,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.branches.push({
                         index: vertexIndex,
                         length: 25 + Math.random() * 35,
-                        angleOffset: (Math.random() - 0.5) * 1.2,
+                        // 移除隨機 Offset，確保角度固定
                         hasAtom: Math.random() > 0.4
                     });
                 }
@@ -153,10 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
                 
-                ctx.lineWidth = 4.0; // 修正線條寬度，5.0 在手機上會太粗
+                ctx.lineWidth = 4.0;
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
 
+                // 繪製六邊形本體
                 ctx.beginPath();
                 for (let i = 0; i < 6; i++) {
                     const next = (i + 1) % 6;
@@ -165,15 +159,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 ctx.stroke();
 
+                // 繪製延伸直線 (分支)
                 this.branches.forEach(branch => {
                     const startPoint = points[branch.index];
-                    const branchAngle = startPoint.angle + branch.angleOffset;
+                    
+                    // 修改關鍵：將 branchAngle 固定為 startPoint.angle
+                    // 這樣線段會從中心點穿過頂點直接射出，與鄰邊形成 120 度角
+                    const branchAngle = startPoint.angle; 
+                    
                     const endX = startPoint.x + Math.cos(branchAngle) * branch.length;
                     const endY = startPoint.y + Math.sin(branchAngle) * branch.length;
+                    
                     ctx.beginPath();
                     ctx.moveTo(startPoint.x, startPoint.y);
                     ctx.lineTo(endX, endY);
                     ctx.stroke();
+
                     if (branch.hasAtom) {
                         ctx.beginPath();
                         ctx.arc(endX, endY, 4, 0, Math.PI * 2);
@@ -181,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // 繪製裝飾節點
                 points.forEach((p, idx) => {
                     if (idx % 2 === 0) {
                         ctx.beginPath();
