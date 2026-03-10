@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             navMenu.classList.toggle('active');
         });
-
         document.addEventListener('click', () => {
             navMenu.classList.remove('active');
         });
@@ -23,21 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
-
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-
             pages.forEach(page => {
                 page.classList.remove('active');
                 if (page.id === targetId) {
                     page.classList.add('active');
                 }
             });
-
             if (window.innerWidth <= 800) {
                 navMenu.classList.remove('active');
             }
-            
             window.scrollTo(0, 0);
         });
     });
@@ -73,24 +68,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.y = Math.random() * canvas.height;
                 this.vx = (Math.random() - 0.5) * 1.7; 
                 this.vy = (Math.random() - 0.5) * 1.7;
-                this.radius = 45; 
+                this.radius = 45; // 六邊形邊長
                 this.angle = Math.random() * Math.PI * 2;
                 this.rotationSpeed = (Math.random() - 0.5) * 0.003;
                 this.isConnectedType = Math.random() < 0.3;
 
                 this.branches = [];
-                const branchCount = Math.floor(Math.random() * 3) + 2;
-                const availableIndices = [0, 1, 2, 3, 4, 5];
-                for(let i=0; i<branchCount; i++) {
-                    const randomIndex = Math.floor(Math.random() * availableIndices.length);
-                    const vertexIndex = availableIndices.splice(randomIndex, 1)[0];
+                // 決定樣式：A (三根間隔) 或 B (四根連續)
+                const styleType = Math.random() < 0.5 ? 'A' : 'B';
+                
+                let indices = [];
+                if (styleType === 'A') {
+                    // 樣式 A: 三根觸手，每隔一個頂點長一根 (1, 3, 5 位置)
+                    // 隨機起點 0 或 1
+                    const start = Math.floor(Math.random() * 2);
+                    indices = [start, (start + 2) % 6, (start + 4) % 6];
+                } else {
+                    // 樣式 B: 四根觸手，必須連續出現
+                    // 隨機選一個頂點作為起始，往後取連續四個
+                    const start = Math.floor(Math.random() * 6);
+                    indices = [
+                        start, 
+                        (start + 1) % 6, 
+                        (start + 2) % 6, 
+                        (start + 3) % 6
+                    ];
+                }
+
+                indices.forEach(idx => {
                     this.branches.push({
-                        index: vertexIndex,
-                        length: 25 + Math.random() * 35,
-                        // 移除隨機 Offset，確保角度固定
+                        index: idx,
+                        length: this.radius, // 觸手與邊長等長
                         hasAtom: Math.random() > 0.4
                     });
-                }
+                });
             }
 
             resolveCollision(other) {
@@ -162,9 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 繪製延伸直線 (分支)
                 this.branches.forEach(branch => {
                     const startPoint = points[branch.index];
-                    
-                    // 修改關鍵：將 branchAngle 固定為 startPoint.angle
-                    // 這樣線段會從中心點穿過頂點直接射出，與鄰邊形成 120 度角
                     const branchAngle = startPoint.angle; 
                     
                     const endX = startPoint.x + Math.cos(branchAngle) * branch.length;
@@ -182,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // 繪製裝飾節點
+                // 繪製裝飾節點 (維持原本的間隔節點樣式)
                 points.forEach((p, idx) => {
                     if (idx % 2 === 0) {
                         ctx.beginPath();
