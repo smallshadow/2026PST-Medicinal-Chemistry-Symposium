@@ -367,6 +367,7 @@ li {
 }
 .sponsor-item2 img {
     height: 100px;  
+    margin-bottom: 20px;
 }
 .sponsor-item img {
     height: 50px;          /* 統一 Logo 高度 */
