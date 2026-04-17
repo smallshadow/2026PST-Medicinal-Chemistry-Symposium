@@ -365,10 +365,24 @@ li {
     align-items: center;
     gap: 30px;             /* Logo 之間的間距 */
 }
+.sponsor-item2 {
+    display: flex;          /* 啟用彈性佈局 */
+    justify-content: space-between; /* 讓圖片均勻分布，首尾貼齊邊框 */
+    align-items: center;    /* 垂直居中（若圖片高度不一很有用） */
+    gap: 20px;              /* 設定圖片之間的固定間距（可自行調整數值） */
+    margin-bottom: 20px;    /* 每列之間的距離 */
+}
+
 .sponsor-item2 img {
+    width: 20%;             /* 確保三個圖片加起來不超過 100% */
+    height: auto;           /* 維持比例 */
+    object-fit: contain;    /* 確保圖片在固定比例中不變形 */
+    height: 100px;
+}
+/* .sponsor-item2 img {
     height: 100px;  
     margin-bottom: 20px;
-}
+} */
 .sponsor-item img {
     height: 50px;          /* 統一 Logo 高度 */
     width: auto;
