@@ -683,19 +683,47 @@ footer {
     margin-bottom: 20px;
 }
 
+.agenda-table thead th {
+    font-size: 20px;
+    /* font-weight: bold; */
+    /* color: #333333; */
+}
+
+/* 表格整體設定 */
 .agenda-table {
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
+    table-layout: fixed; /* 加入這行：強制套用固定欄寬，不會被內容撐開 */
 }
 
-/* 強制所有表格內文置中 */
+/* 強制所有表格內文置中與基本樣式 */
 .agenda-table th, 
 .agenda-table td {
     padding: 15px;
     border: 1px solid #eee;
     text-align: center !important; /* 強制置中 */
     vertical-align: middle;
+}
+
+/* --- 新增：固定欄位寬度 --- */
+
+/* 設定第一欄 (時間 Time) 的寬度 */
+.agenda-table th:nth-child(1),
+.agenda-table td:nth-child(1) {
+    width: 15%; /* 您可依實際視覺微調此數值 */
+}
+
+/* 第二欄 (內容 Events) 不特別設定，讓它自動填滿剩下的寬度 */
+.agenda-table th:nth-child(2),
+.agenda-table td:nth-child(2) {
+    width: auto; 
+}
+
+/* 設定第三欄 (地點 Location) 的寬度 */
+.agenda-table th:nth-child(3),
+.agenda-table td:nth-child(3) {
+    width: 15%; /* 您可依實際視覺微調此數值 */
 }
 
 .agenda-table th {
@@ -738,3 +766,34 @@ footer {
     font-size: clamp(1.3rem, 1vw + 0.5rem, 2rem);
     color: #2c3e50;  /* 讓粗體字顏色深一點，更有層次感 */
 }
+
+
+.custom-table {
+    border-collapse: collapse;
+    width: 50%;
+    
+    /* 加入這行來讓表格置中 */
+    margin: 0 auto 20px auto; 
+    
+    font-family: sans-serif;
+
+    /* 新增這行：強制套用固定欄寬 */
+    table-layout: fixed; 
+  }
+  
+  .custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .custom-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  /* --- 新增：固定第一欄的寬度 --- */
+  .custom-table th:nth-child(1),
+  .custom-table td:nth-child(1) {
+    width: 120px; /* 您可以依需求更改這個數值，例如 100px 或 30% */
+  }
