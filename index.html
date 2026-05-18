@@ -240,6 +240,7 @@
                         <i class="fas fa-book" style="font-size: 3rem; color: #2c3e50; margin-bottom: 20px;"></i>
                         <h3 style="margin-top: 0; color: #2c3e50;">2026 大會手冊電子檔</h3>
                         <p style="margin-bottom: 25px;">2026 台灣藥學會藥物化學研討會 大會手冊已開放下載。歡迎與會貴賓下載閱讀最新大會資訊、詳細議程與論文摘要。</p>
+                        <!-- 【重要】請將下方 href 中的 "YOUR_DOWNLOAD_URL_HERE" 替換為您的實際 PDF 下載網址 -->
                         <a href="YOUR_DOWNLOAD_URL_HERE" target="_blank" class="guide-btn" style="display: inline-block; padding: 12px 25px; background: #e67e22; color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; border: none; cursor: pointer;">
                             <i class="fas fa-file-pdf"></i> 點此下載大會手冊 (PDF)
                         </a>
@@ -707,5 +708,33 @@
 </footer>
 
     <script src="script.js"></script>
+    <script>
+    // 自動分頁跳轉與網址同步邏輯
+    window.addEventListener('DOMContentLoaded', () => {
+        // 延遲一小段時間確保 script.js 已經加載並綁定原本的點擊事件
+        setTimeout(() => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                // 尋找對應的導覽按鈕並模擬點擊
+                const targetLink = document.querySelector(`.nav-link[data-target="${hash}"]`);
+                if (targetLink) {
+                    targetLink.click();
+                }
+            }
+        }, 150);
+
+        // 當點擊任何選單按鈕時，自動更新瀏覽器網址列，方便您直接複製當前頁面的網址
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const target = link.getAttribute('data-target');
+                if (target) {
+                    // 更新網址列而不重新整理頁面
+                    history.replaceState(null, null, '#' + target);
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>
