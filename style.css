@@ -365,30 +365,46 @@ li {
     align-items: center;
     gap: 30px;             /* Logo 之間的間距 */
 }
+
+/* ========================================================= */
+/* ★ 修改重點區：確保行高固定，寬度自動縮放，並讓 a 標籤滿版 ★ */
+/* ========================================================= */
 .sponsor-item2 {
     display: flex;          /* 啟用彈性佈局 */
-    justify-content: space-between; /* 讓圖片均勻分布，首尾貼齊邊框 */
-    align-items: center;    /* 垂直居中（若圖片高度不一很有用） */
-    gap: 20px;              /* 設定圖片之間的固定間距（可自行調整數值） */
+    justify-content: center;/* ★ 改為 center，不使用 space-between 以免貼邊 */
+    align-items: center;    /* 垂直居中 */
+    gap: 20px;              /* 設定圖片之間的固定間距 */
     margin-bottom: 20px;    /* 每列之間的距離 */
+    height: 100px;          /* ★ 固定每一行的高度 */
+}
+
+.sponsor-item2 a {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* ★ 讓圖片在自己的 a 標籤（格子）內水平置中 */
+    height: 100%;           /* 讓超連結高度撐滿行高 */
+    flex: 1;                /* ★ 新增這行：讓每個 a 標籤平均分配整行的寬度，形成隱形的格子 */
 }
 
 .sponsor-item2 img {
-    width: 20%;             /* 確保三個圖片加起來不超過 100% */
-    height: auto;           /* 維持比例 */
+    height: 100%;           /* ★ 圖片高度撐滿固定好的行高 */
+    width: auto;            /* ★ 寬度根據高度比例自動適應 */
+    max-width: 100%;        /* 避免寬度超出容器 */
     object-fit: contain;    /* 確保圖片在固定比例中不變形 */
-    height: 100px;
 }
-/* .sponsor-item2 img {
-    height: 100px;  
-    margin-bottom: 20px;
-} */
+
+/* 避免下方的 footer sponsor 也因為加入 a 標籤導致跑版 */
+.sponsor-item a {
+    display: block;
+}
+
 .sponsor-item img {
     height: 50px;          /* 統一 Logo 高度 */
     width: auto;
     filter: grayscale(100%); /* 預設灰階，看起來更整潔 */
     opacity: 0.7;
     transition: all 0.3s ease;
+    display: block;        /* 防止底部多出空白 */
 }
 
 /* 滑鼠移上去的效果 */
@@ -397,6 +413,7 @@ li {
     opacity: 1;
     transform: scale(1.05); /* 輕微放大 */
 }
+/* ========================================================= */
 
 /* 頁尾分隔線 */
 .footer-divider {
